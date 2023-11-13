@@ -1,0 +1,68 @@
+ <div  class="col-6" id="diplaymore">
+  <!-- <div>{{ receivedData.name }}</div> -->
+                <form #moredataform="ngForm" >
+
+
+                  <div class="form-group">
+                    <label for="">Name</label>
+                    <input type="text" name="name"
+                       class="form-control " required
+                      ngModel>
+                    
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="">Independent</label>
+                    <input type="text" name="independent"
+                       class="form-control " required
+                      ngModel>
+                    
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="">cca2</label>
+                    <input type="text" name="cca2"
+                       class="form-control " required
+                      ngModel>
+                    
+                  </div>
+
+
+
+                  <div class="form-group">
+                    <label for="">Area</label>
+                    <input type="text" name="area"
+                       class="form-control " required
+                      ngModel>
+                    
+                  </div>
+
+
+
+
+
+                  <div class="form-group">
+                    <label for="">Population</label>
+                    <input type="text" name="population"
+                       class="form-control " required
+                      ngModel>
+                    
+                  </div>
+
+                  <input [disabled]="moredataform.form.invalid" class="btn btn-success " type="submit"
+                    value="{{  'Update'}}">
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+                  &nbsp;
+
+
+                  <button routerLink="/list" class="btn btn-primary " type="button">Cancel </button>
+
+
+                </form>
+              </div>
