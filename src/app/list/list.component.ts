@@ -31,6 +31,7 @@ export class ListComponent implements OnInit {
     
     this.DataService.setSharedData(id);
     this.DataService.setSharedDataName(name);
+    // this.moreclicked(id);
     
   }
   testData(id:any,name:any) {

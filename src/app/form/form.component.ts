@@ -71,6 +71,8 @@ export class FormComponent implements OnInit {
 
   fillForm() {
        this.form.setValue({
+        name: this.alldata
+        
         //name: "testing",
        //name: this.alldata[0].name.common,
     // //   cca2: this.alldata.cca2,
