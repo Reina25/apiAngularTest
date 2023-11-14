@@ -5,45 +5,33 @@ import { data } from '../model/data';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
 
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
-  more: boolean = false;
+ 
   alldata: data[] = [];
-  //currentdataID: string;
+  
+  id: any;
+  name: any;
+  independent: boolean;
+  cca2: string;
+  area: number;
+  population: number;
 
-  @ViewChild('moredataform') form: NgForm;
-
-
-  receivedData: any;
-
-  constructor(private DataService: DataService, private http: HttpClient) {
-    this.receivedData = this.DataService.getSharedDataName();
-
-  }
+  constructor(private DataService: DataService, private http: HttpClient) {  }
 
   ngOnInit() {
-    //this.receivedData = this.DataService.getSharedDataName();
-     this.fetchDataPerName(this.receivedData);
-    //console.log(this.receivedData + "boo");
-      
-    //this.fillForm();
+  //this.fillForm();
+    this.fetchDataPerName(this.DataService.getSharedDataName());
   }
 
-  cancelmore() {
-    this.more = false;
-    this.form.reset();
 
-
-
-  }
-
-  
-  private   fetchDataPerName(name: any) {
-     this.http.get<{ [key: string]: data; }>(
+  private fetchDataPerName(name: any) {
+    this.http.get<{ [key: string]: data; }>(
       // 'https://angulardatabasetest-default-rtdb.firebaseio.com/data.json')
       'https://restcountries.com/v3.1/name/' + name
     )
@@ -53,66 +41,30 @@ export class FormComponent implements OnInit {
         for (const key in response) {
           if (response.hasOwnProperty(key)) {
             data.push({ ...response[key], id: key });
-
-
-          }
-
+          }          
         }
         return data;
       }))
       .subscribe((data) => {
-        //console.log(data);
         this.alldata = data;
-        this.fillForm()
-        //console.log("i am inside fetch data");
-        //console.log(this.alldata);
+        this.fillFormFetch(data[0].name.common,data[0].independent,data[0].cca2,data[0].area,data[0].population);
+        // console.log(data[0].population);
       })
   }
 
   fillForm() {
-       this.form.setValue({
-        name: this.alldata
-        
-        //name: "testing",
-       //name: this.alldata[0].name.common,
-    // //   cca2: this.alldata.cca2,
-    // //   independent: alldata.independent,
-    // //   area: alldata.area,
-    // //   population: alldata.population,
-     });
-    //console.log("i am here");
-    //console.log(this.alldata);
+    this.name = this.DataService.getSharedDataName();
+    this.independent = this.DataService.getSharedDataIndependent();
+    this.cca2 = this.DataService.getSharedDataCca2();
+    this.area = this.DataService.getSharedDataArea();
+    this.population = this.DataService.getSharedDataPopulation();    
   }
+  fillFormFetch(nameParam:any,independentParam:any,cca2Param:any,areaParam:any,populationParam:any){    
+    this.name = nameParam;
+    this.independent = independentParam;
+    this.cca2 = cca2Param;
+    this.area = areaParam;
+    this.population = populationParam;
 
-  // fetchData(id: string) {
-  //   //this.more=true;
-
-
-  //   // this.currentdataID = id;
-  //   //this.receivedData = this.DataService.getSharedData();
-  //   //id=this.receivedData;
-
-  //   //Get the product based on the id
-  //   let currentdata = this.alldata.find((d) => { return d.id === id });
-  //   //console.log(this.form);
-
-  //   //Populate the form with the product details
-  //   // this.form.setValue({
-  //   //   name:currentdata.name.common,
-  //   //   cca2: currentdata.cca2,
-  //   //   independent: currentdata.independent,
-  //   //   area: currentdata.area,
-  //   //   population: currentdata.population,
-  //   // });
-
-  //   this.form.setValue({
-  //     name: "nametest"/*,
-  //     cca2: currentdata.cca2,
-  //     independent: currentdata.independent,
-  //     area: currentdata.area,
-  //     population: currentdata.population,*/
-  //   });
-
-  // }
-
+  }
 }

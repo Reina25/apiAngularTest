@@ -1,13 +1,16 @@
  <div  class="col-6" id="diplaymore">
-  <!-- <div>{{ receivedData.id }}</div> -->
+  <div class="row">
+  </div>
+ 
+
                 <form #moredataform="ngForm" >
 
 
                   <div class="form-group">
                     <label for="">Name</label>
-                    <input type="text" name="name"
+                    <input id="name" type="text" name="name"
                        class="form-control " required
-                      ngModel>
+                       [(ngModel)]="name">
                     
                   </div>
 
@@ -17,7 +20,7 @@
                     <label for="">Independent</label>
                     <input type="text" name="independent"
                        class="form-control " required
-                      ngModel>
+                       [(ngModel)]="independent">
                     
                   </div>
 
@@ -27,7 +30,7 @@
                     <label for="">cca2</label>
                     <input type="text" name="cca2"
                        class="form-control " required
-                      ngModel>
+                       [(ngModel)]="cca2">
                     
                   </div>
 
@@ -37,7 +40,7 @@
                     <label for="">Area</label>
                     <input type="text" name="area"
                        class="form-control " required
-                      ngModel>
+                       [(ngModel)]="area">
                     
                   </div>
 
@@ -49,7 +52,7 @@
                     <label for="">Population</label>
                     <input type="text" name="population"
                        class="form-control " required
-                      ngModel>
+                       [(ngModel)]="population">
                     
                   </div>
 

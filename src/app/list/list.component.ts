@@ -13,34 +13,52 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ListComponent implements OnInit {
   alldata: data[] =[];
-  currentdataID: string;
+
+
+  currentdataID: number;
   currentDataName:string;
-  more:boolean=false;
-  
-  @ViewChild('moredataform') form: NgForm;
+  currentDataIndependent:boolean;
+  currentDataCca2:string;
+  currentDataArea:number;
+  currentDataPopulation:number;
 
-  constructor(private http: HttpClient, private DataService: DataService ) {
-  
 
-  }
+
+
+
+  constructor(private http: HttpClient, private DataService: DataService ) { }
 
  
-  sendData(id:any,name:any) {
+  sendData(id:number,name:string,independent:boolean,cca2:string,area:number,population:number) {
     this.currentdataID=id;
-    this.currentDataName = name
+    this.currentDataName = name;
+    this.currentDataIndependent = independent;
+    this.currentDataCca2 = cca2;
+    this.currentDataArea = area;
+    this.currentDataPopulation = population;
     
-    this.DataService.setSharedData(id);
+    this.DataService.setSharedID(id);
     this.DataService.setSharedDataName(name);
-    // this.moreclicked(id);
+
+    this.DataService.setSharedDataIndependent(independent);
+    this.DataService.setSharedDataCca2(cca2);
+
+    this.DataService.setSharedDataArea(area);
+    this.DataService.setSharedDataPopulation(population);
+
     
   }
-  testData(id:any,name:any) {
-   console.log(id + " - " + name)
+
+  sendDataName(name:any){
+    this.currentDataName=name;
+    this.DataService.setSharedDataName(name);
+
   }
-  
+ 
 
   ngOnInit(){
     this.fetchdata();
+ 
 
   }
 
@@ -53,6 +71,7 @@ export class ListComponent implements OnInit {
     this.http.get<{[key: string]:data}>(
       // 'https://angulardatabasetest-default-rtdb.firebaseio.com/data.json')
       'https://restcountries.com/v3.1/all'
+      // 'https://restcountries.com/v3.1/name/' + name
     )
       .pipe(map((response) => {
         const data = [];
@@ -68,31 +87,9 @@ export class ListComponent implements OnInit {
         return data;
       }))
       .subscribe((data) => {
-        //console.log(data);
         this.alldata=data;
     
       })
-  }
-
-  moreclicked(id: string){
-    this.more=true;
-    
-
-    this.currentdataID = id;
-    //Get the product based on the id
-    let currentdata = this.alldata.find((d) => {return d.id === id});
-    //console.log(this.form);
-
-    //Populate the form with the product details
-    this.form.setValue({
-      name:currentdata.name.common,
-      cca2: currentdata.cca2,
-      independent: currentdata.independent,
-      area: currentdata.area,
-      population: currentdata.population,
-      
-    });
-
   }
 
 

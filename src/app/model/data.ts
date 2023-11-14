@@ -5,13 +5,12 @@ export class data{
  
     independent : boolean;
     name: name;
-    id?: string;
+    id?: number;
     cca2: string;
-
-    ccn3?: string
-    cca3: string;
-    cioc?: string;
     area: number;
     population: number;
+
+
+    
 
 }
