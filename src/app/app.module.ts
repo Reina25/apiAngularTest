@@ -8,6 +8,9 @@ import { AppRoutingModule, routingcomp } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { TableTestComponent } from './table-test/table-test.component';
+import { TableTest2Component } from './table-test2/table-test2.component';
+
 
 
 @NgModule({
@@ -15,13 +18,16 @@ import { FooterComponent } from './footer/footer.component';
     AppComponent,
     routingcomp,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    TableTest2Component,
+    // TableTestComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
