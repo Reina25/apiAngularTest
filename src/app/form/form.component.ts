@@ -1,6 +1,5 @@
 import { DataService } from './../service/data.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { data } from '../model/data';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
@@ -32,7 +31,6 @@ export class FormComponent implements OnInit {
 
   private fetchDataPerName(name: any) {
     this.http.get<{ [key: string]: data; }>(
-      // 'https://angulardatabasetest-default-rtdb.firebaseio.com/data.json')
       'https://restcountries.com/v3.1/name/' + name
     )
       .pipe(map((response) => {

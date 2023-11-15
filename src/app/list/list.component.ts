@@ -1,8 +1,7 @@
 import { data } from './../model/data';
 import { DataService } from './../service/data.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { NgForm } from '@angular/forms';
 import { map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -26,7 +25,7 @@ export class ListComponent implements OnInit {
 
 
 
-  constructor(private http: HttpClient, private DataService: DataService ) { }
+  constructor(private http: HttpClient, private DataService: DataService) { }
 
  
   sendData(id:number,name:string,independent:boolean,cca2:string,area:number,population:number) {

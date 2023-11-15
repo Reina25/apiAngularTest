@@ -1,4 +1,4 @@
- <div  class="col-6" id="diplaymore">
+ <div  class="col-6 py-5" id="diplaymore">
   <div class="row">
   </div>
  
@@ -56,15 +56,13 @@
                     
                   </div>
 
-                  <input [disabled]="moredataform.form.invalid" class="btn btn-success " type="submit"
+                  <div class="row">
+                    <input [disabled]="moredataform.form.invalid" class="btn btn-success col-2 mr-5 ml-2" type="submit"
                     value="{{  'Update'}}">
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
-                  &nbsp;
+             
 
-
-                  <button routerLink="/list" class="btn btn-primary " type="button">Cancel </button>
+                  <button routerLink="/list" class="btn btn-primary col-2" type="button">Cancel</button>
+                  </div>
 
 
                 </form>

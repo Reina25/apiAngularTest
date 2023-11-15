@@ -6,12 +6,16 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule, routingcomp } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingcomp
+    routingcomp,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

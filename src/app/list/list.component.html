@@ -1,42 +1,34 @@
-      
-              <div class="col-6" id="display_data_table">
-                <h3>All Data</h3>
-               
-                
+<div class="py-5 col-6" id="display_data_table">
+  <h3>All Data</h3>
 
-        <table id="data" class="table-bordered ">
-            <tr>
-              
-                <th>id</th>
-              
-                <th>name</th>
-                <th>cca2</th>
-              
-                <th>Actions</th>
-            </tr>
-            <tr *ngFor="let data of alldata; let i = index">
-             
-               <td>{{data.id}}</td>
-                <td  >{{data.name.common}}</td>
-                <td>{{data.cca2}}</td>
-                
-                
 
-                
-                <td>
-                
-                  <!-- <a routerLink="/form" id="noblue"><button class="btn btn-primary" type="button"
-                    (click)="sendData(data.id,data.name.common,data.independent, data.cca2,data.area,data.population)"
-                    
-                    >more </button></a> -->
 
-                    <a routerLink="/form" id="noblue"><button class="btn btn-primary" type="button"
-                        (click)="sendDataName(data.name.common)"
-                        
-                        >more </button></a>
-                </td>
-            </tr>
-      
-            
-        </table>
-              </div>
+  <table id="data" class=" table-bordered ">
+    <tr>
+
+      <th>id</th>
+
+      <th>name</th>
+
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let data of alldata; let i = index">
+
+      <td>{{data.id}}</td>
+      <td>{{data.name.common}}</td>
+
+      <td>
+
+        <!-- <a routerLink="/form" id="noblue"><button class="btn btn-primary" type="button"
+              (click)="sendData(data.id,data.name.common,data.independent, data.cca2,data.area,data.population)">more</button></a> -->
+
+        <a routerLink="/form" id="noblue"><button class="btn btn-primary" type="button"
+            (click)="sendDataName(data.name.common)">more</button></a>
+      </td>
+    </tr>
+   
+
+
+  </table>
+  
+</div>
