@@ -2,7 +2,7 @@ import { data } from './../model/data';
 import { DataService } from './../service/data.service';
 import { Component, OnInit } from '@angular/core';
 
-import { map } from 'rxjs';
+import { Subject, map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -15,7 +15,8 @@ export class TableTestComponent implements OnInit {
   alldata: data[] =[];
   currentPage :any = 1;
   data: any[] = [];
-  itemsPerPage = 20;
+  itemsPerPage = 15;
+  
  
 
 
@@ -31,6 +32,8 @@ export class TableTestComponent implements OnInit {
 
 
   constructor(private http: HttpClient, private DataService: DataService) { }
+
+
 
  
   sendData(id:number,name:string,independent:boolean,cca2:string,area:number,population:number) {
