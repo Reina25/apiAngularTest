@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { TableTestComponent } from './table-test/table-test.component';
 import { TableTest2Component } from './table-test2/table-test2.component';
+import { ListComponent } from './list/list.component';
 
 
 
@@ -21,6 +22,7 @@ import { TableTest2Component } from './table-test2/table-test2.component';
     FooterComponent,
     TableTest2Component,
     // TableTestComponent
+    ListComponent
   ],
   imports: [
     BrowserModule,

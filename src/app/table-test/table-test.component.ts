@@ -2,7 +2,7 @@ import { data } from './../model/data';
 import { DataService } from './../service/data.service';
 import { Component, OnInit } from '@angular/core';
 
-import { Subject, map } from 'rxjs';
+import {  map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -13,12 +13,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TableTestComponent implements OnInit {
   alldata: data[] =[];
-  currentPage :any = 1;
   data: any[] = [];
-  itemsPerPage = 15;
   
- 
-
+  currentPage: number = 1;
+  entriesPerPage: number = 15;
+  totalEntries: number;
 
   currentdataID: number;
   currentDataName:string;
@@ -27,15 +26,8 @@ export class TableTestComponent implements OnInit {
   currentDataArea:number;
   currentDataPopulation:number;
 
-
-
-
-
   constructor(private http: HttpClient, private DataService: DataService) { }
 
-
-
- 
   sendData(id:number,name:string,independent:boolean,cca2:string,area:number,population:number) {
     this.currentdataID=id;
     this.currentDataName = name;
@@ -52,21 +44,17 @@ export class TableTestComponent implements OnInit {
 
     this.DataService.setSharedDataArea(area);
     this.DataService.setSharedDataPopulation(population);
-
     
   }
 
   sendDataName(name:any){
     this.currentDataName=name;
     this.DataService.setSharedDataName(name);
-
   }
  
 
   ngOnInit(){
     this.fetchdata();
- 
-
   }
 
   onDataFetch(){
@@ -81,28 +69,35 @@ export class TableTestComponent implements OnInit {
       // 'https://restcountries.com/v3.1/name/' + name
     )
       .pipe(map((response) => {
-        const data = [];
-       
+        const data = [];       
         for(const key in response){
           if(response.hasOwnProperty(key)){
             data.push({...response[key], id:key})
-           
-
           }
-          
         }
         return data;
       }))
       .subscribe((data) => {
-        this.alldata=data;
+        this.alldata=data;        
         this.loadData();
-    
+        this.totalEntries = this.alldata.length;       
       })
   }
+  
+
+  calculateStartEntry(): number {
+    return (this.currentPage - 1) * this.entriesPerPage + 1;
+  }
+  
+  calculateEndEntry(): number {
+    const endEntry = this.currentPage * this.entriesPerPage;
+    return endEntry > this.totalEntries ? this.totalEntries : endEntry;
+  }
+    
 
   loadData(): void {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
+    const startIndex = (this.currentPage - 1) * this.entriesPerPage;
+    const endIndex = startIndex + this.entriesPerPage;
     this.data = this.alldata.slice(startIndex, endIndex);
   }
 
@@ -121,7 +116,7 @@ export class TableTestComponent implements OnInit {
   }
 
   totalPages(): number {
-    return Math.ceil(this.alldata.length / this.itemsPerPage);
+    return Math.ceil(this.alldata.length / this.entriesPerPage);
   }
 
   getPages(): number[] {
@@ -139,9 +134,5 @@ export class TableTestComponent implements OnInit {
       this.loadData();
     }
   }
-
-
-
-
 
 }
