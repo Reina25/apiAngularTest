@@ -22,7 +22,8 @@ import { ListComponent } from './list/list.component';
     FooterComponent,
     TableTest2Component,
     // TableTestComponent
-    ListComponent
+    ListComponent,
+    
   ],
   imports: [
     BrowserModule,

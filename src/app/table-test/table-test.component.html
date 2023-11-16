@@ -15,23 +15,33 @@
           <div class="col-12">
             <div class="card">          
               <div class="card-body">
-                <table  datatable id="example2" class="table table-bordered table-hover">
+
+                <table id="myTable" class="table table-bordered table-hover">
+
                     <thead>
                       <tr>
                         <th>id</th>
                         <th>name</th>
                         <th>Actions</th>
+                        <!-- <th>Select</th> -->
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let data of data; let i = index">
-                        <td>{{data.id}}</td>
+                      <tr *ngFor="let data of data ; ">
+                        <td>{{data.id }}</td>
                         <td>{{data.name.common}}</td>
                         <td>
                           <a routerLink="/form" id="noblue">
                             <button class="btn btn-primary" type="button" (click)="sendDataName(data.name.common)">more</button>
                           </a>
                         </td>
+                        <!-- <td>
+                          <div class="form-check d-flex align-items-center justify-content-center">
+                          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                          <label class="form-check-label" for="flexCheckDefault">                            
+                          </label>
+                        </div>
+                      </td> -->
                       </tr>
                     </tbody>
                   </table>
@@ -54,25 +64,9 @@
                           <a class="page-link btn " (click)="nextPage()" [class.disabled]="currentPage === totalPages()">&raquo;</a>
                         </li>                               
                     </ul>
-                  </div>
-                  
-                  
-
-                  
-                  
-                  <!-- <div class="pagination py-3 d-flex align-items-center justify-content-center  ">
-                    <button class="btn btn-outline-primary " (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
-                  
-                    <ng-container *ngFor="let page of getPages()">
-                      <button class="btn btn-outline-primary " (click)="goToPage(page)" [class.active]="page === currentPage">{{ page }}</button>
-                    </ng-container>
-                  
-                    <button class="btn btn-outline-primary" (click)="nextPage()" [disabled]="currentPage === totalPages()">Next</button>
-                  </div> -->
-                  
+                  </div>              
               </div>
-            </div>
-            
+            </div>            
           </div>
         </div>
       </div>

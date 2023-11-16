@@ -15,6 +15,9 @@ export class TableTestComponent implements OnInit {
   alldata: data[] =[];
   data: any[] = [];
   
+
+  private originalData: any[] = []; 
+  
   currentPage: number = 1;
   entriesPerPage: number = 15;
   totalEntries: number;
@@ -80,10 +83,11 @@ export class TableTestComponent implements OnInit {
       .subscribe((data) => {
         this.alldata=data;        
         this.loadData();
-        this.totalEntries = this.alldata.length;       
+        this.totalEntries = this.alldata.length - 1 ;    
+           
       })
   }
-  
+
 
   calculateStartEntry(): number {
     return (this.currentPage - 1) * this.entriesPerPage + 1;
@@ -134,5 +138,7 @@ export class TableTestComponent implements OnInit {
       this.loadData();
     }
   }
+
+ 
 
 }
