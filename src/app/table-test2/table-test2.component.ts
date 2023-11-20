@@ -53,6 +53,36 @@ export class TableTest2Component implements OnInit {
     
   }
 
+  dtOptions: DataTables.Settings = {};
+
+  // ngOnInit(): void {
+  //   this.dtOptions = {
+  //     ajax: (dataTablesParameters: any, callback) => {
+  //       this.http
+  //         .post<DataTablesResponse>(
+  //           'https://xtlncifojk.eu07.qoddiapp.com/',
+  //           dataTablesParameters, {}
+  //         ).subscribe(resp => {
+  //           callback({
+  //             recordsTotal: resp.recordsTotal,
+  //             recordsFiltered: resp.recordsFiltered,
+  //             data: resp.data             // <-- see here
+  //           });
+  //         });
+  //     },
+  //     columns: [{
+  //       title: 'ID',
+  //       data: 'id'
+  //     }, {
+  //       title: 'First name',
+  //       data: 'firstName'
+  //     }, {
+  //       title: 'Last name',
+  //       data: 'lastName'
+  //     }]
+  //   };
+  // }
+
   sendDataName(name:any){
     this.currentDataName=name;
     this.DataService.setSharedDataName(name);

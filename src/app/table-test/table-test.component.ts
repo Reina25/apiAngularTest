@@ -17,6 +17,10 @@ export class TableTestComponent implements OnInit {
   
 
   private originalData: any[] = []; 
+  fullData: any[] = []; 
+  displayedData: any[] = [];
+
+
   
   currentPage: number = 1;
   entriesPerPage: number = 15;
@@ -57,35 +61,69 @@ export class TableTestComponent implements OnInit {
  
 
   ngOnInit(){
-    this.fetchdata();
+    this.fetchData();
   }
 
   onDataFetch(){
-    this.fetchdata();
+    this.fetchData();
+  }
+
+  private fetchData() {
+    this.http
+      .get<any[]>('https://restcountries.com/v3.1/all')
+      .subscribe((response) => {
+        this.originalData = response; 
+        this.alldata = [...response]; 
+        this.displayedData = [...response]; 
+        this.loadData();
+        this.totalEntries = this.alldata.length;
+        this.data=this.displayedData;
+      });
   }
 
 
-  private fetchdata(){
-    this.http.get<{[key: string]:data}>(
-      // 'https://angulardatabasetest-default-rtdb.firebaseio.com/data.json')
-      'https://restcountries.com/v3.1/all'
-      // 'https://restcountries.com/v3.1/name/' + name
-    )
-      .pipe(map((response) => {
-        const data = [];       
-        for(const key in response){
-          if(response.hasOwnProperty(key)){
-            data.push({...response[key], id:key})
-          }
-        }
-        return data;
-      }))
-      .subscribe((data) => {
-        this.alldata=data;        
-        this.loadData();
-        this.totalEntries = this.alldata.length - 1 ;    
+  // private fetchdata(){
+  //   this.http.get<{[key: string]:data}>(
+  //     // 'https://angulardatabasetest-default-rtdb.firebaseio.com/data.json')
+  //     'https://restcountries.com/v3.1/all'
+  //     // 'https://restcountries.com/v3.1/name/' + name
+  //   )
+  //     .pipe(map((response) => {
+  //       const data = [];       
+  //       for(const key in response){
+  //         if(response.hasOwnProperty(key)){
+  //           data.push({...response[key], id:key})
+  //         }
+  //       }
+  //       return data;
+  //     }))
+  //     .subscribe((data) => {
+  //       this.alldata=data;        
+  //       this.loadData();
+  //       this.totalEntries = this.alldata.length - 1 ;    
            
-      })
+  //     })
+  // }
+
+  onInputChange(event: Event) {
+    const input = (event.target as HTMLInputElement).value.toUpperCase();
+    this.displayedData = this.originalData.filter((item) => {
+      return item.name.common.toUpperCase().includes(input);
+    });
+    this.totalEntries = this.displayedData.length;
+
+  }
+
+  clearSearch() {
+    
+    const inputElement = document.getElementById('myInput') as HTMLInputElement;
+    inputElement.value = '';
+  
+    this.displayedData = [...this.data];
+    
+    this.totalEntries = this.alldata.length;
+    this.goToPage(1);
+  
   }
 
 
@@ -102,7 +140,7 @@ export class TableTestComponent implements OnInit {
   loadData(): void {
     const startIndex = (this.currentPage - 1) * this.entriesPerPage;
     const endIndex = startIndex + this.entriesPerPage;
-    this.data = this.alldata.slice(startIndex, endIndex);
+    this.displayedData = this.alldata.slice(startIndex, endIndex);
   }
 
   nextPage(): void {

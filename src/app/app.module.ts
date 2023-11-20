@@ -11,6 +11,7 @@ import { FooterComponent } from './footer/footer.component';
 import { TableTestComponent } from './table-test/table-test.component';
 import { TableTest2Component } from './table-test2/table-test2.component';
 import { ListComponent } from './list/list.component';
+import { DataTablesModule } from "angular-datatables";
 
 
 
@@ -30,6 +31,7 @@ import { ListComponent } from './list/list.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    DataTablesModule
     
   ],
   providers: [],
